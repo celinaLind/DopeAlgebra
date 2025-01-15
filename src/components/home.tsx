@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { UserCircle, Cat, Star } from "lucide-react";
+import GameModal from "./game-modal";
 
 interface Game {
   id: string;
@@ -11,6 +12,7 @@ interface Game {
   difficulty: string;
   rating: number;
   author: string;
+  pythonCode?: string;
 }
 
 const defaultGames: Game[] = [
@@ -22,6 +24,7 @@ const defaultGames: Game[] = [
     difficulty: "Beginner",
     rating: 4.5,
     author: "Cat-rina's Mom",
+    pythonCode: 'print("Welcome to MiniCat!")',
   },
   {
     id: "2",
@@ -31,6 +34,7 @@ const defaultGames: Game[] = [
     difficulty: "Intermediate",
     rating: 4.8,
     author: "Cat-rina's Dad",
+    pythonCode: 'print("Welcome to Trial and Error!")',
   },
   {
     id: "3",
@@ -40,10 +44,21 @@ const defaultGames: Game[] = [
     difficulty: "Advanced",
     rating: 4.2,
     author: "NumberNinja",
+    pythonCode: 'print("Welcome to Dreaded Mystery!")',
   },
 ];
 
 const Home = () => {
+  const [selectedGame, setSelectedGame] = React.useState<Game | null>(null);
+
+  const handlePlayGame = (game: Game) => {
+    setSelectedGame(game);
+  };
+
+  const handleCloseGame = () => {
+    setSelectedGame(null);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-circus-purple/5 to-circus-blue/5">
       {/* Navbar */}
@@ -69,7 +84,7 @@ const Home = () => {
           <h2 className="text-4xl font-bold mb-4 text-circus-purple">
             Stay and play
           </h2>
-          <p className="text-gray-300 mb-8">
+          <p className="text-gray-600 mb-8">
             Create and play mini games that are fun and engaging for the
             community
           </p>
@@ -84,7 +99,8 @@ const Home = () => {
           {defaultGames.map((game) => (
             <Card
               key={game.id}
-              className="overflow-hidden border-2 border-circus-blue/20 hover:border-circus-blue/40 transition-all"
+              className="overflow-hidden border-2 border-circus-blue/20 hover:border-circus-blue/40 transition-all cursor-pointer hover:shadow-lg"
+              onClick={() => handlePlayGame(game)}
             >
               <div className="aspect-video relative">
                 <img
@@ -112,6 +128,12 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+      <GameModal
+        game={selectedGame}
+        isOpen={!!selectedGame}
+        onClose={handleCloseGame}
+      />
     </div>
   );
 };
