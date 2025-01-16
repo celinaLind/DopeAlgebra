@@ -1,4 +1,4 @@
-# DopeAlgebra (Hackathon Project - AI generated platform) ~ 3 hours
+# DopeAlgebra (Hackathon Project - AI generated platform) ~ 4 hours
 Stay and play on this CoolMath Games Dupe.
 
 Build your dream mini-game with the help up Cat-rina, our dime a dozen AI bot who will produce ready to play code based on your descriptions.
